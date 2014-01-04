@@ -1,0 +1,68 @@
+{
+    "project": {
+        "name": "deep",
+        "version": "0.0.0"
+    },
+    "files": {
+        "src/deep.js": {
+            "name": "src/deep.js",
+            "modules": {
+                "Deep": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "Deep": {
+            "name": "Deep",
+            "submodules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/deep.js",
+            "line": 5,
+            "description": "AMD and CJS module."
+        }
+    },
+    "classes": {},
+    "classitems": [
+        {
+            "file": "src/deep.js",
+            "line": 18,
+            "description": "Deep may be used as a wrapper.",
+            "class": "",
+            "module": "Deep"
+        },
+        {
+            "file": "src/deep.js",
+            "line": 23,
+            "description": "inspired by and copied from\nhttps://github.com/UmbraEngineering/json-file/blob/master/lib/index.js\nThank you (;",
+            "itemtype": "method",
+            "name": "resolve",
+            "access": "private",
+            "tagname": "",
+            "class": "",
+            "module": "Deep"
+        },
+        {
+            "file": "src/deep.js",
+            "line": 48,
+            "description": "Mixin methods:",
+            "class": "",
+            "module": "Deep"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nDeep may be used as a wrapper.",
+            "line": " src/deep.js:18"
+        },
+        {
+            "message": "Missing item type\nMixin methods:",
+            "line": " src/deep.js:48"
+        }
+    ]
+}

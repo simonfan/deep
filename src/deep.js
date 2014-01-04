@@ -36,14 +36,14 @@ define(["lodash"], function (_) {
         var finalKey = keys.pop();
 
         // loop through keys
-        _.each(keys, function(key) {
-        	// walk
+        _.each(keys, function (key) {
+			// walk
             scope = scope[key];
         });
 
         // run the callback
         return callback(scope, finalKey);
-	};
+	}
 
 	/**
 	 * Mixin methods:
