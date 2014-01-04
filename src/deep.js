@@ -12,7 +12,7 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 /* jshint ignore:end */
 
-define(["lodash"], function (_) {
+define(["lodash", "itr"], function (_, iterator) {
 	'use strict';
 
 	/**
@@ -21,43 +21,69 @@ define(["lodash"], function (_) {
 	var deep = {};
 
 	/**
-	 * inspired by and copied from
-	 * https://github.com/UmbraEngineering/json-file/blob/master/lib/index.js
-	 * Thank you (;
-	 *
-	 * @method resolve
-	 * @private
+	 * Parses a string into multiple keys.
+	 * @method keys
+	 * @param keyStr
 	 */
-	function resolve(scope, keys, callback) {
-
-		keys = keys.replace(/\[(["']?)([^\1]+?)\1?\]/g, '.$2').replace(/^\./, '').split('.');
-
-        // keep the last key from being walked
-        var finalKey = keys.pop();
-
-        // loop through keys
-        _.each(keys, function (key) {
-			// walk
-            scope = scope[key];
-        });
-
-        // run the callback
-        return callback(scope, finalKey);
-	}
-
-	/**
-	 * Mixin methods:
-	 */
-	deep.get = function get(obj, key) {
-		return resolve(obj, key, function (scope, finalKey) {
-			return scope[finalKey];
-		});
+	deep.parseKeys = function parseKeys(keyStr) {
+		return keyStr
+			.replace(/\[(["']?)([^\1]+?)\1?\]/g, '.$2')
+			.replace(/^\./, '')
+			.split('.');
 	};
 
-	deep.set = function set(obj, key, value) {
-		resolve(obj, key, function (scope, finalKey) {
-			scope[finalKey] = value;
+	deep.walker = function walker(scope, keys) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+
+			// var to hold values
+		var values = {},
+			// var to hold path order
+			paths = [];
+
+		_.each(keys, function (key, index) {
+
+			// build the path to the current value
+			var path = _.first(keys, index).join('.');
+			paths.push(path);
+
+			// save
+			values[path] = scope;
+
+			// wakk
+			scope = scope[key];
 		});
+
+		return iterator.object(values, { order: paths });
+	};
+
+	/**
+	 *
+	 * @method get
+	 * @param scope
+	 * @param keys {Array|String}
+
+	 * @param [depth] {Number}
+	 *     Indicates at which depth the walking should be interrupted.
+	 */
+	deep.get = function get(scope, keys) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+
+		return _.reduce(keys, function (result, key, index) {
+			return result[key];
+		}, scope);
+	};
+
+	deep.set = function set(scope, keys, value) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+
+		// keep the last key
+		var lastKey = keys.pop();
+
+		// get the penultimum object
+		scope = deep.get(scope, keys);
+
+		// set
+		scope[lastKey] = value;
 	};
 
 	return deep;

@@ -11,7 +11,8 @@ require.config({
 		lodash: 'bower_components/lodash/dist/lodash.compat',
 		'requirejs-text': 'bower_components/requirejs-text/text',
 		subject: 'bower_components/subject/src/subject',
-		underscore: 'bower_components/underscore/underscore'
+		underscore: 'bower_components/underscore/underscore',
+		itr: 'bower_components/itr/built/iterator'
 	},
 	shim: {
 		backbone: {

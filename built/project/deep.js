@@ -2,4 +2,4 @@
 //     (c) simonfan
 //     Deep is licensed under the MIT terms.
 
-define(["lodash"],function(e){function n(t,n,r){n=n.replace(/\[(["']?)([^\1]+?)\1?\]/g,".$2").replace(/^\./,"").split(".");var i=n.pop();return e.each(n,function(e){t=t[e]}),r(t,i)}var t={};return t.get=function(t,r){return n(t,r,function(e,t){return e[t]})},t.set=function(t,r,i){n(t,r,function(e,t){e[t]=i})},t});
+define(["lodash","itr"],function(e,t){var n={};return n.parseKeys=function(t){return t.replace(/\[(["']?)([^\1]+?)\1?\]/g,".$2").replace(/^\./,"").split(".")},n.walker=function(i,s){s=e.isArray(s)?s:n.parseKeys(s);var o={},u=[];return e.each(s,function(t,n){var r=e.first(s,n).join(".");u.push(r),o[r]=i,i=i[t]}),console.log(u),t.object(o,{order:u})},n.get=function(r,i){return i=e.isArray(i)?i:n.parseKeys(i),e.reduce(i,function(e,t,n){return e[t]},r)},n.set=function(r,i,s){i=e.isArray(i)?i:n.parseKeys(i);var o=i.pop();r=n.get(r,i),r[o]=s},n});

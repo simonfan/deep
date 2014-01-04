@@ -100,7 +100,7 @@
 if (typeof define !== &#x27;function&#x27;) { var define = require(&#x27;amdefine&#x27;)(module) }
 /* jshint ignore:end */
 
-define([&quot;lodash&quot;], function (_) {
+define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 	&#x27;use strict&#x27;;
 
 	/**
@@ -109,43 +109,71 @@ define([&quot;lodash&quot;], function (_) {
 	var deep = {};
 
 	/**
-	 * inspired by and copied from
-	 * https://github.com/UmbraEngineering/json-file/blob/master/lib/index.js
-	 * Thank you (;
-	 *
-	 * @method resolve
-	 * @private
+	 * Parses a string into multiple keys.
+	 * @method keys
+	 * @param keyStr
 	 */
-	function resolve(scope, keys, callback) {
+	deep.parseKeys = function parseKeys(keyStr) {
+		return keyStr
+			.replace(/\[([&quot;&#x27;]?)([^\1]+?)\1?\]/g, &#x27;.$2&#x27;)
+			.replace(/^\./, &#x27;&#x27;)
+			.split(&#x27;.&#x27;);
+	};
 
-		keys = keys.replace(/\[([&quot;&#x27;]?)([^\1]+?)\1?\]/g, &#x27;.$2&#x27;).replace(/^\./, &#x27;&#x27;).split(&#x27;.&#x27;);
+	deep.walker = function walker(scope, keys) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
 
-        // keep the last key from being walked
-        var finalKey = keys.pop();
+			// var to hold values
+		var values = {},
+			// var to hold path order
+			paths = [];
 
-        // loop through keys
-        _.each(keys, function(key) {
-        	// walk
-            scope = scope[key];
-        });
+		_.each(keys, function (key, index) {
 
-        // run the callback
-        return callback(scope, finalKey);
+			// build the path to the current value
+			var path = _.first(keys, index).join(&#x27;.&#x27;);
+			paths.push(path);
+
+			// save
+			values[path] = scope;
+
+			// wakk
+			scope = scope[key];
+		});
+
+		console.log(paths)
+
+		return iterator.object(values, { order: paths });
 	};
 
 	/**
-	 * Mixin methods:
+	 *
+	 * @method get
+	 * @param scope
+	 * @param keys {Array|String}
+
+	 * @param [depth] {Number}
+	 *     Indicates at which depth the walking should be interrupted.
 	 */
-	deep.get = function get(obj, key) {
-		return resolve(obj, key, function (scope, finalKey) {
-			return scope[finalKey];
-		});
+	deep.get = function get(scope, keys) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+
+		return _.reduce(keys, function (result, key, index) {
+			return result[key];
+		}, scope);
 	};
 
-	deep.set = function set(obj, key, value) {
-		resolve(obj, key, function (scope, finalKey) {
-			scope[finalKey] = value;
-		});
+	deep.set = function set(scope, keys, value) {
+		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+
+		// keep the last key
+		var lastKey = keys.pop();
+
+		// get the penultimum object
+		scope = deep.get(scope, keys);
+
+		// set
+		scope[lastKey] = value;
 	};
 
 	return deep;

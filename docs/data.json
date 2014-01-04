@@ -39,18 +39,40 @@
         {
             "file": "src/deep.js",
             "line": 23,
-            "description": "inspired by and copied from\nhttps://github.com/UmbraEngineering/json-file/blob/master/lib/index.js\nThank you (;",
+            "description": "Parses a string into multiple keys.",
             "itemtype": "method",
-            "name": "resolve",
-            "access": "private",
-            "tagname": "",
+            "name": "keys",
+            "params": [
+                {
+                    "name": "keyStr",
+                    "description": ""
+                }
+            ],
             "class": "",
             "module": "Deep"
         },
         {
             "file": "src/deep.js",
-            "line": 48,
-            "description": "Mixin methods:",
+            "line": 61,
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "scope",
+                    "description": ""
+                },
+                {
+                    "name": "keys",
+                    "description": "",
+                    "type": "Array|String"
+                },
+                {
+                    "name": "depth",
+                    "description": "\n     Indicates at which depth the walking should be interrupted.",
+                    "type": "Number",
+                    "optional": true
+                }
+            ],
             "class": "",
             "module": "Deep"
         }
@@ -59,10 +81,6 @@
         {
             "message": "Missing item type\nDeep may be used as a wrapper.",
             "line": " src/deep.js:18"
-        },
-        {
-            "message": "Missing item type\nMixin methods:",
-            "line": " src/deep.js:48"
         }
     ]
 }
