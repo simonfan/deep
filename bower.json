@@ -1,0 +1,16 @@
+{
+  "name": "deep",
+  "main": "src/deep.js",
+  "version": "0.0.0",
+  "description": "Stuff to work with nested object values.",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "requirejs": "*",
+    "requirejs-text": "*",
+    "underscore": "*",
+    "jquery": "*",
+    "qunit": "*"
+  }
+}
