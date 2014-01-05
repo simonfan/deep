@@ -32,6 +32,33 @@ define(["lodash", "itr"], function (_, iterator) {
 			.split('.');
 	};
 
+
+	/**
+	 * Walker object.
+	 */
+	var deepWalker = iterator.object.extend({
+		/**
+		 * Parses out the next key to be walked to.
+		 *
+		 * @method nextStep
+		 */
+		nextStep: function nextStep() {
+			var regexp = new RegExp('^' + this.currentKey() + '\\.');
+			return this.nextKey().replace(regexp, '');
+		},
+
+		currentStep: function currentStep() {
+			var regexp = new RegExp('^' + this.previousKey() + '\\.');
+			return this.currentKey().replace(regexp, '');
+		},
+
+		previousStep: function previousStep() {
+			var pkey = this.previousKey() || '';
+
+			return _.last(pkey.split('.'));
+		}
+	});
+
 	deep.walker = function walker(scope, keys) {
 		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
 
@@ -53,7 +80,7 @@ define(["lodash", "itr"], function (_, iterator) {
 			scope = scope[key];
 		});
 
-		return iterator.object(values, { order: paths });
+		return deepWalker(values, { order: paths });
 	};
 
 	/**

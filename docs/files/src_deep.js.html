@@ -120,6 +120,33 @@ define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 			.split(&#x27;.&#x27;);
 	};
 
+
+	/**
+	 * Walker object.
+	 */
+	var deepWalker = iterator.object.extend({
+		/**
+		 * Parses out the next key to be walked to.
+		 *
+		 * @method nextStep
+		 */
+		nextStep: function nextStep() {
+			var regexp = new RegExp(&#x27;^&#x27; + this.currentKey() + &#x27;\\.&#x27;);
+			return this.nextKey().replace(regexp, &#x27;&#x27;);
+		},
+
+		currentStep: function currentStep() {
+			var regexp = new RegExp(&#x27;^&#x27; + this.previousKey() + &#x27;\\.&#x27;);
+			return this.currentKey().replace(regexp, &#x27;&#x27;);
+		},
+
+		previousStep: function previousStep() {
+			var pkey = this.previousKey() || &#x27;&#x27;;
+
+			return _.last(pkey.split(&#x27;.&#x27;));
+		}
+	});
+
 	deep.walker = function walker(scope, keys) {
 		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
 
@@ -141,9 +168,7 @@ define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 			scope = scope[key];
 		});
 
-		console.log(paths)
-
-		return iterator.object(values, { order: paths });
+		return deepWalker(values, { order: paths });
 	};
 
 	/**

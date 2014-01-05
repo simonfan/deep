@@ -77,7 +77,27 @@
 
 				walker.next();
 				walker.nextKey().should.equal('a.b');
-			})
+			});
+
+			it('nextStep returns the next key to be walked to', function () {
+				var walker = this.walker;
+
+				walker.next();
+				walker.nextKey().should.equal('a');
+				walker.nextStep().should.equal('a');
+				walker.previousStep().should.equal('');
+
+				walker.next();
+				walker.nextKey().should.equal('a.b');
+				walker.nextStep().should.equal('b');
+				walker.previousStep().should.equal('');
+
+				walker.next();
+				walker.nextKey().should.equal('a.b.c');
+				walker.nextStep().should.equal('c');
+
+				walker.previousStep().should.equal('a');
+			});
 		});
 	});
 });

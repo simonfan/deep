@@ -53,7 +53,23 @@
         },
         {
             "file": "src/deep.js",
-            "line": 61,
+            "line": 36,
+            "description": "Walker object.",
+            "class": "",
+            "module": "Deep"
+        },
+        {
+            "file": "src/deep.js",
+            "line": 40,
+            "description": "Parses out the next key to be walked to.",
+            "itemtype": "method",
+            "name": "nextStep",
+            "class": "",
+            "module": "Deep"
+        },
+        {
+            "file": "src/deep.js",
+            "line": 86,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -81,6 +97,10 @@
         {
             "message": "Missing item type\nDeep may be used as a wrapper.",
             "line": " src/deep.js:18"
+        },
+        {
+            "message": "Missing item type\nWalker object.",
+            "line": " src/deep.js:36"
         }
     ]
 }
