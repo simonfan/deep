@@ -1,3 +1,3 @@
 # deep
 
-Stuff to work with nested object values.
+Group of methods to manipulate deep object properties.

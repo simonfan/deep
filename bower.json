@@ -1,8 +1,8 @@
 {
   "name": "deep",
-  "main": "src/deep.js",
+  "main": "built/deep.js",
   "version": "0.0.0",
-  "description": "Stuff to work with nested object values.",
+  "description": "Group of methods to manipulate deep object properties.",
   "dependencies": {
     "lodash": "~2.4.1",
     "subject": "~0.3.2",

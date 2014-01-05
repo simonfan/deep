@@ -1,8 +1,8 @@
 {
   "name": "deep",
-  "main": "./src/deep",
+  "main": "./src",
   "version": "0.0.0",
-  "description": "Stuff to work with nested object values.",
+  "description": "Group of methods to manipulate deep object properties.",
   "repository": {
     "type": "git",
     "url": "https://github.com/simonfan/deep.git"
@@ -10,8 +10,8 @@
   "dependencies": {
     "amdefine": ">=0.1.0",
     "lodash": "~2.4.1",
-    "subject": "~0.3.2",
-    "itr": "~0.1.2"
+    "itr": "~0.1.4",
+    "subject": "~0.3.2"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

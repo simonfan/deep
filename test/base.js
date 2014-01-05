@@ -2,7 +2,7 @@
 
 	var mod = typeof define !== 'function' ?
 		// node
-		'.././src/deep' :
+		'.././src' :
 		// browser
 		'deep',
 		// dependencies for the test

@@ -4,8 +4,8 @@
         "version": "0.0.0"
     },
     "files": {
-        "src/deep.js": {
-            "name": "src/deep.js",
+        "src/index.js": {
+            "name": "src/index.js",
             "modules": {
                 "Deep": 1
             },
@@ -22,7 +22,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 5,
             "description": "AMD and CJS module."
         }
@@ -30,14 +30,14 @@
     "classes": {},
     "classitems": [
         {
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 18,
             "description": "Deep may be used as a wrapper.",
             "class": "",
             "module": "Deep"
         },
         {
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 23,
             "description": "Parses a string into multiple keys.",
             "itemtype": "method",
@@ -52,14 +52,14 @@
             "module": "Deep"
         },
         {
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 36,
             "description": "Walker object.",
             "class": "",
             "module": "Deep"
         },
         {
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 40,
             "description": "Parses out the next key to be walked to.",
             "itemtype": "method",
@@ -68,7 +68,7 @@
             "module": "Deep"
         },
         {
-            "file": "src/deep.js",
+            "file": "src/index.js",
             "line": 86,
             "itemtype": "method",
             "name": "get",
@@ -96,11 +96,11 @@
     "warnings": [
         {
             "message": "Missing item type\nDeep may be used as a wrapper.",
-            "line": " src/deep.js:18"
+            "line": " src/index.js:18"
         },
         {
             "message": "Missing item type\nWalker object.",
-            "line": " src/deep.js:36"
+            "line": " src/index.js:36"
         }
     ]
 }
