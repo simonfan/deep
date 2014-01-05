@@ -56,6 +56,21 @@ define(["lodash", "itr"], function (_, iterator) {
 			var pkey = this.previousKey() || '';
 
 			return _.last(pkey.split('.'));
+		},
+
+
+		/**
+		 * Returns a string
+		 *
+		 * @method remainingSteps
+		 */
+		remainingSteps: function remainingSteps() {
+			var re = new RegExp('^' + this.currentKey() + '\\.');
+			return this.destination().replace(re, '');
+		},
+
+		destination: function destination() {
+			return _.last(this.order);
 		}
 	});
 
@@ -63,21 +78,24 @@ define(["lodash", "itr"], function (_, iterator) {
 		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
 
 			// var to hold values
-		var values = {},
+		var values = {
+				'': scope
+			},
 			// var to hold path order
-			paths = [];
+			paths = [''];
 
 		_.each(keys, function (key, index) {
 
 			// build the path to the current value
-			var path = _.first(keys, index).join('.');
+			var path = _.first(keys, index + 1).join('.');
 			paths.push(path);
+
+			// walk
+			scope = scope[key];
 
 			// save
 			values[path] = scope;
 
-			// wakk
-			scope = scope[key];
 		});
 
 		return deepWalker(values, { order: paths });
