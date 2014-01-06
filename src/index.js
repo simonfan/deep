@@ -12,8 +12,10 @@
 if (typeof define !== 'function') { var define = require('amdefine')(module) }
 /* jshint ignore:end */
 
-define(["lodash", "itr"], function (_, iterator) {
+define(function (require, exports, module) {
 	'use strict';
+
+	var _ = require('lodash');
 
 	/**
 	 * Deep may be used as a wrapper.
@@ -25,111 +27,17 @@ define(["lodash", "itr"], function (_, iterator) {
 	 * @method keys
 	 * @param keyStr
 	 */
-	deep.parseKeys = function parseKeys(keyStr) {
-		return keyStr
-			.replace(/\[(["']?)([^\1]+?)\1?\]/g, '.$2')
-			.replace(/^\./, '')
-			.split('.');
-	};
-
+	deep.parseKeys = require('./__deep__/keys');
 
 	/**
-	 * Walker object.
+	 * Walker
 	 */
-	var deepWalker = iterator.object.extend({
-		/**
-		 * Parses out the next key to be walked to.
-		 *
-		 * @method nextStep
-		 */
-		nextStep: function nextStep() {
-			var regexp = new RegExp('^' + this.currentKey() + '\\.');
-			return this.nextKey().replace(regexp, '');
-		},
-
-		currentStep: function currentStep() {
-			var regexp = new RegExp('^' + this.previousKey() + '\\.');
-			return this.currentKey().replace(regexp, '');
-		},
-
-		previousStep: function previousStep() {
-			var pkey = this.previousKey() || '';
-
-			return _.last(pkey.split('.'));
-		},
-
-
-		/**
-		 * Returns a string
-		 *
-		 * @method remainingSteps
-		 */
-		remainingSteps: function remainingSteps() {
-			var re = new RegExp('^' + this.currentKey() + '\\.');
-			return this.destination().replace(re, '');
-		},
-
-		destination: function destination() {
-			return _.last(this.order);
-		}
-	});
-
-	deep.walker = function walker(scope, keys) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
-
-			// var to hold values
-		var values = {
-				'': scope
-			},
-			// var to hold path order
-			paths = [''];
-
-		_.each(keys, function (key, index) {
-
-			// build the path to the current value
-			var path = _.first(keys, index + 1).join('.');
-			paths.push(path);
-
-			// walk
-			scope = scope[key];
-
-			// save
-			values[path] = scope;
-
-		});
-
-		return deepWalker(values, { order: paths });
-	};
+	deep.walker = require('./__deep__/walker');
 
 	/**
-	 *
-	 * @method get
-	 * @param scope
-	 * @param keys {Array|String}
-
-	 * @param [depth] {Number}
-	 *     Indicates at which depth the walking should be interrupted.
+	 * Get and set
 	 */
-	deep.get = function get(scope, keys) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
-
-		return _.reduce(keys, function (result, key, index) {
-			return result[key];
-		}, scope);
-	};
-
-	deep.set = function set(scope, keys, value) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
-
-		// keep the last key
-		var lastKey = keys.pop();
-
-		// get the penultimum object
-		scope = deep.get(scope, keys);
-
-		// set
-		scope[lastKey] = value;
-	};
+	_.extend(deep, require('./__deep__/getset'));
 
 	return deep;
 });

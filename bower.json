@@ -1,7 +1,7 @@
 {
   "name": "deep",
   "main": "built/deep.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Group of methods to manipulate deep object properties.",
   "dependencies": {
     "lodash": "~2.4.1",

@@ -98,6 +98,43 @@
 
 				walker.previousStep().should.equal('a');
 			});
+
+			it('hasNext() should return false if the Object depth is not enough', function () {
+				var obj = {
+						a: {
+							b: {
+								c: {} // no 'd'
+							}
+						}
+					},
+					walker = deep.walker(obj, 'a.b.c.d[0]');
+
+				// root exists
+				walker.next()
+					.should.eql(obj);
+
+				// a exists
+				walker.next()
+					.should.eql(obj.a);
+
+				// b exists
+				walker.next()
+					.should.eql(obj.a.b);
+
+				// c exists
+				walker.next()
+					.should.eql(obj.a.b.c);
+
+				// d was NOT DEFINED, thus it is undefined
+				should(walker.next())
+					.eql(void(0));
+
+				// here is the real test:
+				// d is undefined, thus d[0] CANNOT EXIST
+				// d CANNOT have further properties
+				walker.hasNext()
+					.should.be.false;
+			})
 		});
 	});
 });
