@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>src/deep-sub/walker.js - deep</title>
+    <title>src/__deep__/walker.js - deep</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -82,44 +82,20 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: src/deep-sub/walker.js</h1>
+                        <h1 class="file-heading">File: src/__deep__/walker.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-//     Deep
-//     (c) simonfan
-//     Deep is licensed under the MIT terms.
-
-/**
- * AMD and CJS module.
- *
- * @module Deep
- */
-
 /* jshint ignore:start */
 if (typeof define !== &#x27;function&#x27;) { var define = require(&#x27;amdefine&#x27;)(module) }
 /* jshint ignore:end */
 
-define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
+define(function (require, exports, module) {
 	&#x27;use strict&#x27;;
 
-	/**
-	 * Deep may be used as a wrapper.
-	 */
-	var deep = {};
-
-	/**
-	 * Parses a string into multiple keys.
-	 * @method keys
-	 * @param keyStr
-	 */
-	deep.parseKeys = function parseKeys(keyStr) {
-		return keyStr
-			.replace(/\[([&quot;&#x27;]?)([^\1]+?)\1?\]/g, &#x27;.$2&#x27;)
-			.replace(/^\./, &#x27;&#x27;)
-			.split(&#x27;.&#x27;);
-	};
-
+	var _ = require(&#x27;lodash&#x27;),
+		iterator = require(&#x27;itr&#x27;),
+		parseKeys = require(&#x27;./keys&#x27;);
 
 	/**
 	 * Walker object.
@@ -162,8 +138,11 @@ define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 		}
 	});
 
-	deep.walker = function walker(scope, keys) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
+	/**
+	 * The exports
+	 */
+	var walker = module.exports = function walker(scope, keys) {
+		keys = _.isArray(keys) ? keys : parseKeys(keys);
 
 			// var to hold values
 		var values = {
@@ -172,7 +151,10 @@ define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 			// var to hold path order
 			paths = [&#x27;&#x27;];
 
-		_.each(keys, function (key, index) {
+		/**
+		 * Use every so that the loop is breakable.
+		 */
+		_.every(keys, function (key, index) {
 
 			// build the path to the current value
 			var path = _.first(keys, index + 1).join(&#x27;.&#x27;);
@@ -184,42 +166,12 @@ define([&quot;lodash&quot;, &quot;itr&quot;], function (_, iterator) {
 			// save
 			values[path] = scope;
 
+			// if the value is undefined, the loop shall be stopped.
+			return !_.isUndefined(scope);
 		});
 
 		return deepWalker(values, { order: paths });
 	};
-
-	/**
-	 *
-	 * @method get
-	 * @param scope
-	 * @param keys {Array|String}
-
-	 * @param [depth] {Number}
-	 *     Indicates at which depth the walking should be interrupted.
-	 */
-	deep.get = function get(scope, keys) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
-
-		return _.reduce(keys, function (result, key, index) {
-			return result[key];
-		}, scope);
-	};
-
-	deep.set = function set(scope, keys, value) {
-		keys = _.isArray(keys) ? keys : deep.parseKeys(keys);
-
-		// keep the last key
-		var lastKey = keys.pop();
-
-		// get the penultimum object
-		scope = deep.get(scope, keys);
-
-		// set
-		scope[lastKey] = value;
-	};
-
-	return deep;
 });
 
     </pre>

@@ -12,7 +12,7 @@ require.config({
 		qunit: '../bower_components/qunit/qunit/qunit',
 		lodash: '../bower_components/lodash/dist/lodash.compat',
 		'requirejs-text': '../bower_components/requirejs-text/text',
-		subject: '../bower_components/subject/src/subject',
+		subject: '../bower_components/subject/built/subject',
 		underscore: '../bower_components/underscore/underscore'
 	},
 	shim: {

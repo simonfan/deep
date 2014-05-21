@@ -1,12 +1,12 @@
 {
   "name": "deep",
   "main": "built/deep.js",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Group of methods to manipulate deep object properties.",
   "dependencies": {
     "lodash": "~2.4.1",
     "subject": "~0.3.2",
-    "itr": "*"
+    "itr": "0.1.6"
   },
   "devDependencies": {
     "requirejs": "*",
@@ -14,5 +14,9 @@
     "underscore": "*",
     "jquery": "*",
     "qunit": "*"
+  },
+  "resolutions": {
+    "subject": "0.5.8",
+    "itr": "0.1.6"
   }
 }

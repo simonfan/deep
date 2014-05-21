@@ -4,18 +4,32 @@
         "version": "0.0.0"
     },
     "files": {
-        "src/deep-sub/walker.js": {
-            "name": "src/deep-sub/walker.js",
-            "modules": {
-                "Deep": 1
-            },
+        "src/__deep__/getset.js": {
+            "name": "src/__deep__/getset.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/__deep__/keys.js": {
+            "name": "src/__deep__/keys.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/__deep__/walker.js": {
+            "name": "src/__deep__/walker.js",
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
         "src/index.js": {
             "name": "src/index.js",
-            "modules": {},
+            "modules": {
+                "Deep": 1
+            },
             "classes": {},
             "fors": {},
             "namespaces": {}
@@ -29,7 +43,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/deep-sub/walker.js",
+            "file": "src/index.js",
             "line": 5,
             "description": "AMD and CJS module."
         }
@@ -37,55 +51,8 @@
     "classes": {},
     "classitems": [
         {
-            "file": "src/deep-sub/walker.js",
-            "line": 18,
-            "description": "Deep may be used as a wrapper.",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/deep-sub/walker.js",
-            "line": 23,
-            "description": "Parses a string into multiple keys.",
-            "itemtype": "method",
-            "name": "keys",
-            "params": [
-                {
-                    "name": "keyStr",
-                    "description": ""
-                }
-            ],
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/deep-sub/walker.js",
-            "line": 36,
-            "description": "Walker object.",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/deep-sub/walker.js",
-            "line": 40,
-            "description": "Parses out the next key to be walked to.",
-            "itemtype": "method",
-            "name": "nextStep",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/deep-sub/walker.js",
-            "line": 62,
-            "description": "Returns a string",
-            "itemtype": "method",
-            "name": "remainingSteps",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/deep-sub/walker.js",
-            "line": 104,
+            "file": "src/__deep__/getset.js",
+            "line": 12,
             "itemtype": "method",
             "name": "get",
             "params": [
@@ -105,19 +72,66 @@
                     "optional": true
                 }
             ],
-            "class": "",
-            "module": "Deep"
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/keys.js",
+            "line": 6,
+            "description": "Parses a string into multiple keys.",
+            "itemtype": "method",
+            "name": "keys",
+            "params": [
+                {
+                    "name": "keyStr",
+                    "description": ""
+                }
+            ],
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/walker.js",
+            "line": 12,
+            "description": "Walker object.",
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/walker.js",
+            "line": 16,
+            "description": "Parses out the next key to be walked to.",
+            "itemtype": "method",
+            "name": "nextStep",
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/walker.js",
+            "line": 38,
+            "description": "Returns a string",
+            "itemtype": "method",
+            "name": "remainingSteps",
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/walker.js",
+            "line": 53,
+            "description": "The exports",
+            "class": ""
+        },
+        {
+            "file": "src/__deep__/walker.js",
+            "line": 66,
+            "description": "Use every so that the loop is breakable.",
+            "class": ""
         },
         {
             "file": "src/index.js",
-            "line": 18,
+            "line": 20,
             "description": "Deep may be used as a wrapper.",
             "class": "",
             "module": "Deep"
         },
         {
             "file": "src/index.js",
-            "line": 23,
+            "line": 25,
             "description": "Parses a string into multiple keys.",
             "itemtype": "method",
             "name": "keys",
@@ -132,71 +146,43 @@
         },
         {
             "file": "src/index.js",
-            "line": 36,
-            "description": "Walker object.",
+            "line": 32,
+            "description": "Walker",
             "class": "",
             "module": "Deep"
         },
         {
             "file": "src/index.js",
-            "line": 40,
-            "description": "Parses out the next key to be walked to.",
-            "itemtype": "method",
-            "name": "nextStep",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/index.js",
-            "line": 62,
-            "description": "Returns a string",
-            "itemtype": "method",
-            "name": "remainingSteps",
-            "class": "",
-            "module": "Deep"
-        },
-        {
-            "file": "src/index.js",
-            "line": 104,
-            "itemtype": "method",
-            "name": "get",
-            "params": [
-                {
-                    "name": "scope",
-                    "description": ""
-                },
-                {
-                    "name": "keys",
-                    "description": "",
-                    "type": "Array|String"
-                },
-                {
-                    "name": "depth",
-                    "description": "\n     Indicates at which depth the walking should be interrupted.",
-                    "type": "Number",
-                    "optional": true
-                }
-            ],
+            "line": 37,
+            "description": "Get and set",
             "class": "",
             "module": "Deep"
         }
     ],
     "warnings": [
         {
-            "message": "Missing item type\nDeep may be used as a wrapper.",
-            "line": " src/deep-sub/walker.js:18"
-        },
-        {
             "message": "Missing item type\nWalker object.",
-            "line": " src/deep-sub/walker.js:36"
+            "line": " src/__deep__/walker.js:12"
+        },
+        {
+            "message": "Missing item type\nThe exports",
+            "line": " src/__deep__/walker.js:53"
+        },
+        {
+            "message": "Missing item type\nUse every so that the loop is breakable.",
+            "line": " src/__deep__/walker.js:66"
         },
         {
             "message": "Missing item type\nDeep may be used as a wrapper.",
-            "line": " src/index.js:18"
+            "line": " src/index.js:20"
         },
         {
-            "message": "Missing item type\nWalker object.",
-            "line": " src/index.js:36"
+            "message": "Missing item type\nWalker",
+            "line": " src/index.js:32"
+        },
+        {
+            "message": "Missing item type\nGet and set",
+            "line": " src/index.js:37"
         }
     ]
 }
