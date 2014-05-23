@@ -10,8 +10,7 @@
   "dependencies": {
     "amdefine": ">=0.1.0",
     "lodash": "~2.4.1",
-    "itr": "~0.1.6",
-    "subject": "~0.3.2"
+    "itr": "~0.1.6"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

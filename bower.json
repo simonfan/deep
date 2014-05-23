@@ -5,7 +5,6 @@
   "description": "Group of methods to manipulate deep object properties.",
   "dependencies": {
     "lodash": "~2.4.1",
-    "subject": "~0.3.2",
     "itr": "0.1.6"
   },
   "devDependencies": {
@@ -14,9 +13,5 @@
     "underscore": "*",
     "jquery": "*",
     "qunit": "*"
-  },
-  "resolutions": {
-    "subject": "0.5.8",
-    "itr": "0.1.6"
   }
 }
